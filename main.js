@@ -198,23 +198,16 @@
 
     async function insertionSort() {
         let n = array.length; 
-
         for (let i = 1; i < n; ++i) {
             let key = array[i]; 
             let j = i - 1; 
 
             while (j >= 0 && array[j] > key) {
-                array[j + 1] = array[j]; 
-                j = j - 1; 
                 await sleep(waiting_time); 
-                colorSingle(j + 1); 
-
+                swap(j, j + 1); 
+                j = j - 1; 
             }
-            array[j + 1] = key; 
-            await sleep(waiting_time); 
-            colorSingle(j + 1); 
         }
-        colorSingle(n - 1); 
     }
 
     async function partition(low, high) {
