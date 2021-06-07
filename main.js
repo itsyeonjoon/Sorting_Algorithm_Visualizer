@@ -171,9 +171,9 @@
         } else if (option === "selection") {
             selectionSort(); 
         } else if (option === "merge") {
-            mergeSort(array, 0, array.length - 1); 
+            mergeSortHyper(0, array.length - 1); 
         } else if (option === "quick") {
-            quickSort(0, array.length - 1); 
+            quickSortHyper(0, array.length - 1); 
         }
     }
 
@@ -310,13 +310,17 @@
 
     }
 
+    async function quickSortHyper(low, high) {
+        await quickSort(low, high); 
+        await button_sorted(); 
+    }
+
     async function quickSort(low, high) {
         if (low < high) {
             let p = await partition(low, high); 
             await quickSort(low, p - 1); 
             await quickSort(p + 1, high); 
         }
-        await button_sorted();  
     }
 
     async function colorSingle(x) {
@@ -330,32 +334,32 @@
         xbar.style.backgroundColor = colorPicker(array[x]); 
     }
 
-    async function merge(arr, l, m, r) { 
-        let a1 = m - l + 1; 
-        let a2 = r - m; 
+    async function merge(low, mid, high) { 
+        let a1 = mid - low + 1; 
+        let a2 = high - mid; 
 
         let left = new Array(a1); 
         let right = new Array(a2);
 
         for (let i = 0; i < a1; i++) {
-            left[i] = arr[l + i]; 
+            left[i] = array[low + i]; 
         }
         for (let j = 0; j < a2; j++) {
-            right[j] = arr[m + 1 + j]; 
+            right[j] = array[mid + 1 + j]; 
         }
 
         let i = 0; 
         let j = 0; 
-        let k = l; 
+        let k = low; 
 
         while (i < a1 && j < a2) {
             if (left[i] <= right[j]) {
-                arr[k] = left[i]; 
+                array[k] = left[i]; 
                 await sleep(waiting_time); 
                 colorSingle(k);
                 i++; 
             } else {
-                arr[k] = right[j];  
+                array[k] = right[j];  
                 await sleep(waiting_time); 
                 colorSingle(k);
                 j++; 
@@ -363,7 +367,7 @@
             k++; 
         }
         while (i < a1) {
-            arr[k] = left[i]; 
+            array[k] = left[i]; 
             await sleep(waiting_time); 
             colorSingle(k);
             i++; 
@@ -371,7 +375,7 @@
         }
 
         while (j < a2) {
-            arr[k] = right[j]; 
+            array[k] = right[j]; 
             await sleep(waiting_time); 
             colorSingle(k);
             j++; 
@@ -379,21 +383,25 @@
         }
     }
 
-    async function mergeSort(arr, l, r) {
-        if (l >= r) {
+    async function mergeSortHyper(low, high) {
+        await mergeSort(low, high); 
+        await button_sorted();  
+    }
+
+    async function mergeSort(low, high) {
+        if (low >= high) {
             return; 
         } else {
-            let m = Math.floor((l + r) / 2); 
+            let mid = Math.floor((low + high) / 2); 
             // divide
             await sleep(waiting_time); 
-            await mergeSort(arr, l, m); 
+            await mergeSort(low, mid); 
             await sleep(waiting_time); 
-            await mergeSort(arr, m + 1, r); 
+            await mergeSort(mid + 1, high); 
             // combine 
             await sleep(waiting_time); 
-            await merge(arr, l, m, r); 
+            await merge(low, mid, high); 
         }
-        await button_sorted();  
     } 
 
 })();
