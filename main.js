@@ -171,7 +171,7 @@
         } else if (option === "selection") {
             selectionSort(); 
         } else if (option === "merge") {
-            mergeSort(array, 0, 50 - 1); 
+            mergeSort(array, 0, array.length - 1); 
         } else if (option === "quick") {
             quickSort(0, array.length - 1); 
             console.log(array); 
