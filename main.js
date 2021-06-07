@@ -161,6 +161,7 @@
 
     function sortType() {
         document.getElementById("sort").disabled = true;
+        document.getElementById("newArray").disabled = true;
         document.getElementById("sort").style.backgroundColor = purple; 
         document.getElementById("sort").textContent = "Sorting..."; 
         if (option === "bubble") {
@@ -173,8 +174,13 @@
             mergeSort(array, 0, array.length - 1); 
         } else if (option === "quick") {
             quickSort(0, array.length - 1); 
-            console.log(array); 
         }
+    }
+
+    async function button_sorted() {
+        await sleep(waiting_time); 
+        document.getElementById("sort").textContent = "Sorted"; 
+        document.getElementById("newArray").disabled = false;
     }
 
     function colorPicker(length) {
@@ -244,7 +250,7 @@
                 }
             }
         }
-        document.getElementById("newArray").disabled = false; 
+        await button_sorted();         
     }
 
     async function selectionSort() {
@@ -262,6 +268,7 @@
             await sleep(waiting_time); 
             swap(minimum, i); 
         }
+        await button_sorted();  
     }
 
     async function insertionSort() {
@@ -276,6 +283,7 @@
                 j = j - 1; 
             }
         }
+        await button_sorted();  
     }
 
     async function partition(low, high) {
@@ -308,6 +316,7 @@
             await quickSort(low, p - 1); 
             await quickSort(p + 1, high); 
         }
+        await button_sorted();  
     }
 
     async function colorSingle(x) {
@@ -384,6 +393,7 @@
             await sleep(waiting_time); 
             await merge(arr, l, m, r); 
         }
-    }
+        await button_sorted();  
+    } 
 
 })();
