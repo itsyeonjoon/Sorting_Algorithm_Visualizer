@@ -7,22 +7,84 @@
     let waiting_time = 50; 
     let option = "bubble"; 
 
+    let arrayLength = 50; 
+    let size = "medium"; 
+
+    let speed = "moderate"; 
+
     let purple = "#562075"; 
     let turqoise = "#109ead"; 
+    let white = "#f0f0f0"; 
 
     function init() {
         generateArray(); 
         document.getElementById("newArray").onclick = generateArray; 
+
         document.getElementById("bubble").onclick = changeToBubble; 
         document.getElementById("insertion").onclick = changeToInsertion; 
         document.getElementById("selection").onclick = changeToSelection; 
         document.getElementById("merge").onclick = changeToMerge; 
         document.getElementById("quick").onclick = changeToQuick; 
 
+        document.getElementById("small").onclick = sizeSmall; 
+        document.getElementById("medium").onclick = sizeMedium; 
+        document.getElementById("large").onclick = sizeLarge; 
+
+        document.getElementById("slow").onclick = speedSlow; 
+        document.getElementById("moderate").onclick = speedMod; 
+        document.getElementById("fast").onclick = speedFast; 
+
         document.getElementById("sort").onclick = sortType; 
     }
 
-    // other functions you may define 
+    // other functions defined
+
+    // Size functions
+    function sizeSmall() {
+        document.getElementById(size).style.fontWeight = "normal"; 
+        size = "small"; 
+        document.getElementById(size).style.fontWeight = "bold";
+        arrayLength = 25;  
+    }
+
+    function sizeMedium() {
+        document.getElementById(size).style.fontWeight = "normal"; 
+        size = "medium"; 
+        document.getElementById(size).style.fontWeight = "bold";
+        arrayLength = 50;  
+    }
+
+    function sizeLarge() {
+        console.log(size); 
+        document.getElementById(size).style.fontWeight = "normal"; 
+        size = "large"; 
+        document.getElementById(size).style.fontWeight = "bold";
+        arrayLength = 100;  
+    }
+
+    // Speed functions
+    function speedSlow() {
+        document.getElementById(speed).style.fontWeight = "normal"; 
+        speed = "slow"; 
+        document.getElementById(speed).style.fontWeight = "bold";
+        waiting_time = 100;  
+    }
+
+    function speedMod() {
+        document.getElementById(speed).style.fontWeight = "normal"; 
+        speed = "moderate"; 
+        document.getElementById(speed).style.fontWeight = "bold";
+        waiting_time = 50;  
+    }
+
+    function speedFast() {
+        document.getElementById(speed).style.fontWeight = "normal"; 
+        speed = "fast"; 
+        document.getElementById(speed).style.fontWeight = "bold";
+        waiting_time = 20;  
+    }
+
+    // Functions for changing the sorting algorithms 
     function changeToBubble() {
         document.getElementById(option).style.color = "black"; 
         document.getElementById(option).style.fontWeight = "normal"; 
@@ -76,14 +138,21 @@
             container.removeChild(container.firstChild); 
         }
 
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < arrayLength; i++) {
             let length = Math.floor(Math.random() * (500 - 20 + 1) + 20);
             array.push(length); 
 
             let bar = document.createElement("div"); 
             let name = "b" + i; 
             bar.id = name; 
+            let wi = 20; 
             bar.style.width = "20px"; 
+            if (arrayLength == 25) {
+                wi = 40; 
+            } else if (arrayLength == 100) {
+                wi = 9; 
+            }
+            bar.style.width = wi + "px"; 
             bar.style.height = length + "px"; 
             bar.style.backgroundColor = colorPicker(length); 
             bar.style.margin = "0px 1px 0px 1px"; 

@@ -101,14 +101,6 @@ button {
     cursor:pointer; 
 }
 
-#sort:hover {
-    border: solid; 
-    border-color: var(--turqoise); 
-    background-color:white;
-    font-weight: bolder; 
-    color: var(--turqoise); 
-}
-
 #newArray {
     font-size: 16px; 
     margin-top: 10px;
@@ -141,6 +133,58 @@ button {
 #bubble {
     font-weight: bold; 
     color: var(--dark-purple); 
+}
+
+.size {
+    margin-top: 30px; 
+}
+
+.size, .speed {
+    display: flex; 
+    flex-direction: column; 
+    font-weight: bold; 
+    margin-bottom: 12px; 
+    align-items: center; 
+}
+
+.size .name {
+    color: var(--dark-blue); 
+    font-size: 16px; 
+    margin-bottom: 4px;
+    
+}
+
+.size .buttons {
+    justify-content: flex; 
+    
+}
+
+.size .buttons button {
+    font-size: 14px; 
+    cursor: pointer;
+}
+
+.size .buttons button:hover {
+    font-weight: bold;
+}
+
+.speed .name {
+    color: var(--dark-blue); 
+    font-size: 16px;   
+    margin-bottom: 4px;
+}
+
+.speed .buttons button {
+    font-size: 14px; 
+    cursor: pointer;
+}
+
+.speed .buttons button:hover {
+    font-weight: bold;
+}
+
+#medium, #moderate {
+    font-weight: bold; 
 }
 
 #main {
