@@ -8,6 +8,7 @@
     let option = "bubble"; 
 
     let purple = "#562075"; 
+    let turqoise = "#109ead"; 
 
     function init() {
         generateArray(); 
@@ -64,6 +65,11 @@
     }
 
     function generateArray() {
+        if (document.getElementById("sort").disabled) {
+            document.getElementById("sort").disabled = false;
+            document.getElementById("sort").style.backgroundColor = turqoise; 
+            document.getElementById("sort").textContent = "Let's Sort It!"; 
+        }
         array = []; 
         let container = document.getElementById("main"); 
         while (container.firstChild) {
@@ -85,6 +91,24 @@
         }
     }
 
+    function sortType() {
+        document.getElementById("sort").disabled = true;
+        document.getElementById("sort").style.backgroundColor = purple; 
+        document.getElementById("sort").textContent = "Sorting..."; 
+        if (option === "bubble") {
+            bubbleSort(); 
+        } else if (option === "insertion") {
+            insertionSort(); 
+        } else if (option === "selection") {
+            selectionSort(); 
+        } else if (option === "merge") {
+            mergeSort(array, 0, 50 - 1); 
+        } else if (option === "quick") {
+            quickSort(0, array.length - 1); 
+            console.log(array); 
+        }
+    }
+
     function colorPicker(length) {
         let rgb = [69, 217, 214]; 
         let subtractedGreen = rgb[1] - Math.floor(length / 3); 
@@ -99,21 +123,6 @@
 
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms)); 
-    }
-
-    function sortType() {
-        if (option === "bubble") {
-            bubbleSort(); 
-        } else if (option === "insertion") {
-            insertionSort(); 
-        } else if (option === "selection") {
-            selectionSort(); 
-        } else if (option === "merge") {
-            mergeSort(array, 0, 50 - 1); 
-        } else if (option === "quick") {
-            quickSort(0, array.length - 1); 
-            console.log(array); 
-        }
     }
 
     async function swap(x, y) {
@@ -139,7 +148,7 @@
         xbar.style.backgroundColor = colorPicker(array[x]); 
         ybar.style.backgroundColor = colorPicker(array[y]); 
 
-        // await sleep(waiting_time); 
+        await sleep(waiting_time); 
     }
 
     async function color(x, y) {
@@ -167,6 +176,7 @@
                 }
             }
         }
+        document.getElementById("newArray").disabled = false; 
     }
 
     async function selectionSort() {
