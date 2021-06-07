@@ -55,7 +55,6 @@
     }
 
     function sizeLarge() {
-        console.log(size); 
         document.getElementById(size).style.fontWeight = "normal"; 
         size = "large"; 
         document.getElementById(size).style.fontWeight = "bold";
