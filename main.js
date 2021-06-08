@@ -165,6 +165,9 @@
     function sortType() {
         document.getElementById("sort").disabled = true;
         document.getElementById("newArray").disabled = true;
+        document.querySelectorAll('.size button').forEach(elem => {
+            elem.disabled = true;
+        });          
         document.getElementById("sort").style.backgroundColor = purple; 
         document.getElementById("sort").textContent = "Sorting..."; 
         if (option === "bubble") {
@@ -184,6 +187,9 @@
         await sleep(waiting_time); 
         document.getElementById("sort").textContent = "Sorted"; 
         document.getElementById("newArray").disabled = false;
+        document.querySelectorAll('.size button').forEach(elem => {
+            elem.disabled = false;
+        });  
     }
 
     function colorPicker(length) {
