@@ -45,6 +45,7 @@
         size = "small"; 
         document.getElementById(size).style.fontWeight = "bold";
         arrayLength = 25;  
+        generateArray();
     }
 
     function sizeMedium() {
@@ -52,13 +53,15 @@
         size = "medium"; 
         document.getElementById(size).style.fontWeight = "bold";
         arrayLength = 50;  
+        generateArray();
     }
 
     function sizeLarge() {
         document.getElementById(size).style.fontWeight = "normal"; 
         size = "large"; 
         document.getElementById(size).style.fontWeight = "bold";
-        arrayLength = 100;  
+        arrayLength = 100; 
+        generateArray(); 
     }
 
     // Speed functions
@@ -253,15 +256,35 @@
         await button_sorted();         
     }
 
+    async function color(x) {
+        let xId = "b" + x; 
+        let xbar = document.getElementById(xId);
+
+        xbar.style.backgroundColor = "orange"; 
+        await sleep(waiting_time); 
+        xbar.style.backgroundColor = colorPicker(array[x]); 
+    }
+
+    async function colorMin(nowMin, prevMin) {
+        let minId = "b" + nowMin; 
+        let prevId = "b" + prevMin; 
+        let minbar = document.getElementById(minId);
+        let prevbar = document.getElementById(prevId);
+        await sleep(waiting_time); 
+        minbar.style.backgroundColor = "GreenYellow"; 
+        prevbar.style.backgroundColor = colorPicker(array[prevMin]); 
+    }
+
     async function selectionSort() {
         let n = array.length; 
 
         for (let i = 0; i < n - 1; i++) {
             let minimum = i; 
             for (let j = i + 1; j < n; j++) {
+                await sleep(waiting_time); 
+                color(j); 
                 if (array[j] < array[minimum]) {
-                    await sleep(waiting_time); 
-                    color(i, j); 
+                    colorMin(j, minimum); 
                     minimum = j;  
                 }
             }
